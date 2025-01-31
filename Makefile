@@ -99,3 +99,8 @@ gentool-options:
 	@$(GENERATOR) \
                 --gogo_out="Mgoogle/protobuf/descriptor.proto=github.com/gogo/protobuf/protoc-gen-gogo/descriptor:$(DOCKERPATH)" \
                 options/gorm.proto
+
+.PHONY: mod
+mod:
+	find . -name go.mod -execdir sh -c 'go mod tidy; go mod download' \;
+	go work sync
